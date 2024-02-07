@@ -8,14 +8,16 @@ class CounterScreen extends StatefulWidget {
 }
 
 class CounterScreenState extends State<CounterScreen> {
-  int _counter = 0;
+  int _counter = 64;
 
   void _incrementCounter() {
+    if (_counter == 100) return;
     _counter++;
     setState(() {});
   }
 
   void _decreaseCounter() {
+    if (_counter == -100) return;
     _counter--;
     setState(() {});
   }
@@ -26,7 +28,7 @@ class CounterScreenState extends State<CounterScreen> {
       backgroundColor: Colors.amber[900],
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Mi nueva app'),
+        title: const Text('Counter Screen'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -57,7 +59,7 @@ class CounterScreenState extends State<CounterScreen> {
             Text(
               '$_counter',
               style: const TextStyle(
-                fontSize: 30,
+                fontSize: 150,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

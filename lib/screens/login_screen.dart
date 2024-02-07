@@ -32,7 +32,11 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset("assets/images/logo_falabella.png", height: 150);
+    final deviceWidth = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: EdgeInsets.only(top: deviceWidth * 0.1),
+      child: Image.asset("assets/images/logo_falabella.png", height: 150),
+    );
   }
 }
 
@@ -88,51 +92,79 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          height: 200,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  border: Border.all(
-                    color: const Color.fromARGB(74, 82, 90, 83),
-                  ),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Image.asset("assets/images/clave.png", height: 35),
-              ),
-              const Text("Clave",
-                  style: TextStyle(
-                    fontSize: 12,
-                  )),
-              const Text("Dinámica", style: TextStyle(fontSize: 16)),
-            ],
-          ),
+        FooterOption(
+          firstText: "Clave",
+          secondText: "Dinámica",
+          image: "clave.png",
         ),
-        const Text(
-          "¿Necesitas ayuda?",
-          style: TextStyle(
-            color: Color.fromARGB(255, 52, 151, 55),
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+        FooterOption(
+          firstText: "Oportunidades",
+          secondText: "Únicas",
+          image: "oportunidad.png",
         ),
-        const Text(
-          "¿Necesitas ayuda?",
-          style: TextStyle(
-            color: Color.fromARGB(255, 52, 151, 55),
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+        FooterOption(
+          firstText: "Asistencia",
+          image: "asistencia.png",
         ),
       ],
+    );
+  }
+}
+
+class FooterOption extends StatelessWidget {
+  final String firstText;
+  final String? secondText;
+  final String image;
+
+  const FooterOption({
+    super.key,
+    required this.firstText,
+    this.secondText,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      height: 150,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                border: Border.all(
+                  color: const Color.fromARGB(74, 82, 90, 83),
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Image.asset("assets/images/$image", height: 40),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              firstText,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+          Text(
+            secondText ?? " ",
+            style: const TextStyle(
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
